@@ -1,15 +1,15 @@
 ﻿using CommonLibrary;
 using Raylib_cs;
 using UI.Services;
-using System.Numerics;
+using Game.Timer;
 class Program
 {
     static void Main()
     {
+
         Raylib.InitWindow(GameData.SCREEN_WIDTH, GameData.SCREEN_HEIGHT, "Casse tête");
         Raylib.SetTargetFPS(120);
         Map.Instance.LoadMapFromJson("map.json");
-        Player player = new Player(new Vector2(0, 0));
 
         int[,] mapTemplate = Map.Instance.GetMap();
 
@@ -19,19 +19,43 @@ class Program
         {
             for (int j = 0; j < GameData.MAP_WIDTH; j++)
             {
-                if (mapTemplate[j, i] == (int)CeilType.PLAYER)
-                {
-                    player.SetPosition(new Vector2(i + 1, j + 1));
-                    player.AddPath(player.position);
-                }
-                mapCell[j, i] = new Ceil(
-                    (CeilType)mapTemplate[j, i],
+                if ((CeilType)mapTemplate[j, i] == CeilType.NEUTRAL)
+                    mapCell[j, i] = new Neutral(
+                    CeilType.NEUTRAL,
                      (i + 1) * GameData.CELLSIZE,
                       (j + 1) * GameData.CELLSIZE,
                        GameData.CELLSIZE
                        );
+                else if ((CeilType)mapTemplate[j, i] == CeilType.INFECTED)
+                    mapCell[j, i] = new Infected(
+                        CeilType.INFECTED,
+                         (i + 1) * GameData.CELLSIZE,
+                          (j + 1) * GameData.CELLSIZE,
+                           GameData.CELLSIZE
+                           );
+
+                else if ((CeilType)mapTemplate[j, i] == CeilType.WALL)
+                    mapCell[j, i] = new Ceil(
+                    CeilType.WALL,
+                     (i + 1) * GameData.CELLSIZE,
+                      (j + 1) * GameData.CELLSIZE,
+                       GameData.CELLSIZE
+                       );
+                else if ((CeilType)mapTemplate[j, i] == CeilType.DEFENDER)
+                    mapCell[j, i] = new Defender(
+                    CeilType.DEFENDER,
+                     (i + 1) * GameData.CELLSIZE,
+                      (j + 1) * GameData.CELLSIZE,
+                       GameData.CELLSIZE
+                       );
+
             }
         }
+
+        GameTimer timer = new GameTimer();
+
+        ServiceLocator.Register(timer);
+        ServiceLocator.Register(mapCell);
 
 
         // Boucle principale du jeu
@@ -39,6 +63,7 @@ class Program
         {
             // Obtenir le Delta Time (temps écoulé depuis la dernière frame)
             float deltaTime = Raylib.GetFrameTime();
+       
 
             // Début du dessin
             Raylib.BeginDrawing();
@@ -46,16 +71,15 @@ class Program
 
             UIService.Instance.UpdateUI();
 
+            ServiceLocator.Resolve<GameTimer>().UpdateState(deltaTime);
+            ServiceLocator.Resolve<GameTimer>().Draw();
+
             for (int i = 0; i < GameData.MAP_WIDTH; i++)
             {
                 for (int j = 0; j < GameData.MAP_WIDTH; j++)
                 {
-                    if (player.CheckIfIsInPath(mapCell[i, j].GetCeilPosition()))
-                    {
-                        mapCell[i, j].TransformIntoType(CeilType.PATH);
-                    }
-                    mapCell[i, j].Draw();
-                    mapCell[i, j].Update();
+                    ServiceLocator.Resolve<Ceil[,]>()[i, j].Draw();
+                    ServiceLocator.Resolve<Ceil[,]>()[i, j].Update();
                 }
             }
 

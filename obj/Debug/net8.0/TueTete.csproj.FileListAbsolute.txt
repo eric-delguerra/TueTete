@@ -21,3 +21,4 @@ c:\Users\Eric\Documents\GameCodeur\2em partie\TueTete\obj\Debug\net8.0\TueTete.p
 c:\Users\Eric\Documents\GameCodeur\2em partie\TueTete\obj\Debug\net8.0\TueTete.genruntimeconfig.cache
 c:\Users\Eric\Documents\GameCodeur\2em partie\TueTete\obj\Debug\net8.0\ref\TueTete.dll
 c:\Users\Eric\Documents\GameCodeur\2em partie\TueTete\bin\Debug\net8.0\map.json
+c:\Users\Eric\Documents\GameCodeur\2em partie\TueTete\obj\Debug\net8.0\TueTete.sourcelink.json

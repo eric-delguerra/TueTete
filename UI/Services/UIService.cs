@@ -10,24 +10,24 @@ namespace UI.Services
     {
         private List<ButtonService> ButtonServices = new List<ButtonService>();
         private UIService() {
-            IButton button = new ButtonSelectType("BOUCE_UP", CeilType.BOUCE_UP, new Vector2(0, 0));
-            ButtonServices.Add(new ButtonService(button));
+            // IButton button = new ButtonSelectType("INFECTED", CeilType.INFECTED, new Vector2(0, 0));
+            // ButtonServices.Add(new ButtonService(button));
 
-            button = new ButtonSelectType("BOUCE_DOWN", CeilType.BOUCE_DOWN , new Vector2(0, 60));
+            // button = new ButtonSelectType("DEFENDER", CeilType.DEFENDER , new Vector2(0, 60));
 
-            ButtonServices.Add(new ButtonService(button));
-            button = new ButtonSelectType("BOUCE_LEFT", CeilType.BOUCE_LEFT, new Vector2(0, 120));
+            // ButtonServices.Add(new ButtonService(button));
+            // button = new ButtonSelectType("BOUCE_LEFT", CeilType.BOUCE_LEFT, new Vector2(0, 120));
 
-            ButtonServices.Add(new ButtonService(button));
-            button = new ButtonSelectType("BOUCE_RIGHT", CeilType.BOUCE_RIGHT, new Vector2(0, 180));
+            // ButtonServices.Add(new ButtonService(button));
+            // button = new ButtonSelectType("BOUCE_RIGHT", CeilType.BOUCE_RIGHT, new Vector2(0, 180));
 
-            ButtonServices.Add(new ButtonService(button));
-            button = new ButtonSelectType("TELEPORT", CeilType.TELEPORT, new Vector2(0, 240));
+            // ButtonServices.Add(new ButtonService(button));
+            // button = new ButtonSelectType("TELEPORT", CeilType.TELEPORT, new Vector2(0, 240));
 
-            ButtonServices.Add(new ButtonService(button));
-            button = new ButtonSelectType("TELEPORT_DEST", CeilType.TELEPORT_DEST, new Vector2(0, 300));
+            // ButtonServices.Add(new ButtonService(button));
+            // button = new ButtonSelectType("TELEPORT_DEST", CeilType.TELEPORT_DEST, new Vector2(0, 300));
 
-            ButtonServices.Add(new ButtonService(button));
+            // ButtonServices.Add(new ButtonService(button));
          }
 
         public static UIService Instance { get; } = new UIService();

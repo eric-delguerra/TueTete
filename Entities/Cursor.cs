@@ -4,7 +4,7 @@ namespace Game.Cursor
 {
     class Cursor
     {
-        private CeilType type { get; set; } = CeilType.HOVERED;
+        private CeilType type { get; set; } = CeilType.INFECTED;
         public static Cursor Instance { get; } = new Cursor();
 
         public void setType(CeilType type)
